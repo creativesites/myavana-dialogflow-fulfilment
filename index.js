@@ -165,5 +165,7 @@ app.all('/', (req, res) => {
     let intentMap = new Map();
     intentMap.set('Default Fallback Intent', main);
     agent.handleRequest(intentMap);
+    res.status(200).send(agent);
+
 })
 app.listen(process.env.PORT || 3000)
