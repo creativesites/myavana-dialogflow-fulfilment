@@ -1,0 +1,26 @@
+{
+  "name": "myavana-fulf-last",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creativesites/myavana-fulf-last.git"
+  },
+  "author": "Winston Zulu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/creativesites/myavana-fulf-last/issues"
+  },
+  "homepage": "https://github.com/creativesites/myavana-fulf-last#readme",
+  "dependencies": {
+    "dialogflow-fulfillment": "^0.6.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1",
+    "openai": "^3.1.0"
+  }
+}
