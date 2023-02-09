@@ -2,6 +2,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const {WebhookClient} = require('dialogflow-fulfillment');
 const express = require('express');
 require('dotenv').config()
+
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
