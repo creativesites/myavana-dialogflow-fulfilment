@@ -105,20 +105,22 @@ app.post('/webhook', (req, res) => {
             }).then((response) => {
                 console.log(response.data.choices[0].text);
                 agent.add(response.data.choices[0].text);
+                try {
+                    user.prompt += response.data.choices[0].text
+                    await user.save();
+                } catch (error) {
+                    let user = await User.findOne({ user2 });
+                    user.prompt += response.data.choices[0].text
+                    await user.save();
+                }
                 resolve(response.data.choices[0].text);
+                
             }).catch((error) => {
                 console.log(error);
                 reject(error);
             });
         });
-        try {
-            user.prompt += response.data.choices[0].text
-            await user.save();
-        } catch (error) {
-            let user = await User.findOne({ user2 });
-            user.prompt += response.data.choices[0].text
-            await user.save();
-        }
+        
         } catch(err){
             console.log(err)
             agent.add('Sorry, I am having trouble understanding you. Please try again.')
