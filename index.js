@@ -2,7 +2,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const {WebhookClient} = require('dialogflow-fulfillment');
 const express = require('express');
 require('dotenv').config()
-
+const bodyParser = require('body-parser');
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -36,7 +36,8 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const openai = new OpenAIApi(configuration);
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
+//app.use(express.json());
 let users = [];
 async function addOrUpdateUser(sessionId, userSays) {
     try {
