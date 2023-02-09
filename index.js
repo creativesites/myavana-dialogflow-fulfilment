@@ -102,7 +102,7 @@ app.post('/webhook', (req, res) => {
                 frequency_penalty: 0.0,
                 presence_penalty: 0.0,
                 stop: [" Human:", " AI:"],
-            }).then((response) => {
+            }).then(async (response) => {
                 console.log(response.data.choices[0].text);
                 agent.add(response.data.choices[0].text);
                 try {
