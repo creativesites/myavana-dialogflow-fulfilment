@@ -60,6 +60,7 @@ async function addOrUpdateUser(sessionId, userSays) {
     }
 }
 app.post('/webhook', (req, res) => {
+    console.log('req')
     const agent = new WebhookClient({ request: req, response: res });
     async function main(agent) {
         try{
@@ -78,6 +79,7 @@ app.post('/webhook', (req, res) => {
              });
              promptToSend = 'The following is a conversation with a Myavana haircare AI assistant. The assistant is helpful, creative, clever, and very friendly.' + addToPrompt;
         } else {
+            console.log('user found')
             user.prompt += ' ' + userSays;
             user.updatedAt = Date.now();
             if(user.prompt.length > 1000){
@@ -92,9 +94,8 @@ app.post('/webhook', (req, res) => {
             }
         }
         
-        await new Promise((resolve, reject) => {
-            openai.createCompletion({
-                model: "text-curie-001",
+            await openai.createCompletion({
+                model: "text-davinci-003",
                 prompt: promptToSend,
                 temperature: 0.3,
                 max_tokens: 1200,
@@ -104,7 +105,7 @@ app.post('/webhook', (req, res) => {
                 stop: [" Human:", " AI:"],
             }).then(async (response) => {
                 console.log(response.data.choices[0].text);
-                agent.add(response.data.choices[0].text);
+                await agent.add(response.data.choices[0].text);
                 try {
                     user.prompt += response.data.choices[0].text
                     await user.save();
@@ -113,13 +114,13 @@ app.post('/webhook', (req, res) => {
                     user.prompt += response.data.choices[0].text
                     await user.save();
                 }
-                resolve(response.data.choices[0].text);
+                
                 
             }).catch((error) => {
                 console.log(error);
                 reject(error);
             });
-        });
+        
         
         } catch(err){
             console.log(err)
