@@ -73,6 +73,7 @@ app.post('/webhook', (req, res) => {
         let addToPrompt = '\nHuman: ' + userSays + '\nAI: ';
         let promptToSend = ''
         if (!user) {
+            console.log('user not found')
             // if user does not exist, create new user
             user = new User({ 
                 sessionId: user2, 
@@ -80,6 +81,7 @@ app.post('/webhook', (req, res) => {
              });
              promptToSend = 'The following is a conversation with a Myavana haircare AI assistant. The assistant is helpful, creative, clever, and very friendly.' + addToPrompt;
         } else {
+            console.log(user)
             // if user exists, append userSays to prompt and update updatedAt
             user.prompt += ' ' + userSays;
             user.updatedAt = Date.now();
@@ -132,7 +134,7 @@ app.post('/webhook', (req, res) => {
         stop: [" Human:", " AI:"],
         });
         console.log(response.data.choices[0].text);
-        agent.add(response.data.choices[0].text);
+        await agent.add(response.data.choices[0].text);
         // users.forEach( vendor => {
         //     if (vendor['id'] === user) {
         //         let c = vendor.prompt
