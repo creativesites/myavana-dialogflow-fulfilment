@@ -120,7 +120,7 @@ app.all('/', (req, res) => {
         //     })
             
         // }
-        console.log(promptToSend)
+        //console.log(promptToSend)
         const response = await openai.createCompletion({
         model: "text-curie-001",
         prompt: promptToSend,
@@ -132,7 +132,7 @@ app.all('/', (req, res) => {
         stop: [" Human:", " AI:"],
         });
         console.log(response.data.choices[0].text);
-        agent.add(`${response.data.choices[0].text}`);
+        agent.add(response.data.choices[0].text);
         // users.forEach( vendor => {
         //     if (vendor['id'] === user) {
         //         let c = vendor.prompt
@@ -165,7 +165,7 @@ app.all('/', (req, res) => {
     let intentMap = new Map();
     intentMap.set('Default Fallback Intent', main);
     agent.handleRequest(intentMap);
-    res.status(200).send(agent);
+    //res.status(200).send(agent);
 
 })
 app.listen(process.env.PORT || 3000)
