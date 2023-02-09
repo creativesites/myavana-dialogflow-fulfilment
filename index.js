@@ -94,7 +94,7 @@ app.post('/webhook', (req, res) => {
         
         await new Promise((resolve, reject) => {
             openai.createCompletion({
-                model: "text-davinci-003",
+                model: "text-curie-001",
                 prompt: promptToSend,
                 temperature: 0.3,
                 max_tokens: 1200,
