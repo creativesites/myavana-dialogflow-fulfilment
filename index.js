@@ -122,7 +122,7 @@ app.all('/', (req, res) => {
         // }
         console.log(promptToSend)
         const response = await openai.createCompletion({
-        model: "text-davinci-003",
+        model: "text-curie-001",
         prompt: promptToSend,
         temperature: 0.3,
         max_tokens: 1200,
