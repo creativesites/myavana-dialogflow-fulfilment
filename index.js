@@ -59,7 +59,7 @@ async function addOrUpdateUser(sessionId, userSays) {
         console.log(error);
     }
 }
-app.all('/', (req, res) => {
+app.post('/webhook', (req, res) => {
     const agent = new WebhookClient({ request: req, response: res });
     //console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
     //console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
