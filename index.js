@@ -26,11 +26,16 @@ function checkLines(str) {
 }
 function getSimilarKey(userSays) {
     try {
-        const keys = promptCache.keys();
-        const similarityScores = stringSimilarity.findBestMatch(userSays, keys);
+      const keys = promptCache.keys();
+      const similarityScores = stringSimilarity.findBestMatch(userSays, keys);
+      const threshold = 0.7; // You can adjust this threshold value to your liking
+      if (similarityScores.bestMatch.rating >= threshold) {
         return similarityScores.bestMatch.target;
+      } else {
+        return undefined;
+      }
     } catch (error) {
-        return undefined
+      return undefined;
     }
   }
   
