@@ -25,19 +25,31 @@ function checkLines(str) {
     return str;
 }
 function getSimilarKey(userSays) {
-    const keys = promptCache.keys();
-    const similarityScores = stringSimilarity.findBestMatch(userSays, keys);
-    return similarityScores.bestMatch.target;
+    try {
+        const keys = promptCache.keys();
+        const similarityScores = stringSimilarity.findBestMatch(userSays, keys);
+        return similarityScores.bestMatch.target;
+    } catch (error) {
+        return undefined
+    }
   }
   
   function hasSimilarKey(userSays) {
-    const similarKey = getSimilarKey(userSays);
-    return promptCache.has(similarKey);
+    try {
+        const similarKey = getSimilarKey(userSays);
+        return promptCache.has(similarKey);
+    } catch (error) {
+        return false
+    }
   }
   
   function getSimilarValue(userSays) {
-    const similarKey = getSimilarKey(userSays);
-    return promptCache.get(similarKey);
+    try {
+        const similarKey = getSimilarKey(userSays);
+        return promptCache.get(similarKey);
+    } catch (error) {
+        return undefined
+    }
   }
 
 app.post('/webhook', (req, res) => {
