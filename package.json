@@ -25,7 +25,7 @@
     "memcached": "^2.2.2",
     "mongoose": "^6.9.1",
     "node-cache": "^5.1.2",
-    "openai": "^3.1.0",
+    "openai": "^4.16.1",
     "string-similarity": "^4.0.4"
   }
 }
